@@ -7,7 +7,6 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 app.use(express.static(__dirname + '/public'));
 
 app.get('/api/notes', function (req, res) {
@@ -17,7 +16,7 @@ app.get('/api/notes', function (req, res) {
 app.post('/api/notes', function (req, res) {
     const note = req.body
     if (db.length == 0) {
-        note.id = 0
+        note.id = 1
     } else {
         note.id = db[db.length - 1].id + 1
     }
@@ -39,7 +38,6 @@ app.delete('/api/notes/:id', function (req, res) {
         if (err) throw err
         res.sendStatus(200)
     })
-
 })
 
 app.get('/notes', function (req, res) {
