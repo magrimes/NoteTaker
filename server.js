@@ -10,23 +10,18 @@ app.use(express.json());
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, './public/index.html'));
-});
-
-app.get('/notes', function (req, res) {
-    res.sendFile(path.join(__dirname, './public/notes.html'));
-});
-
-
-
 app.get('/api/notes', function (req, res) {
     return res.json(db);
 });
 
 app.post('/api/notes', function (req, res) {
     const note = req.body
-    note.id = db[db.length - 1].id + 1
+    if (db.length == 0) {
+        note.id = 0
+    } else {
+        note.id = db[db.length - 1].id + 1
+    }
+
     db.push(note)
     const temp = db
     console.log(db)
@@ -46,6 +41,14 @@ app.delete('/api/notes/:id', function (req, res) {
     })
 
 })
+
+app.get('/notes', function (req, res) {
+    res.sendFile(path.join(__dirname, './public/notes.html'));
+});
+
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
 
 app.listen(PORT, function () {
     console.log("App listening on PORT: " + PORT);
