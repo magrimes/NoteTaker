@@ -10,7 +10,7 @@ There are three API routes used: the first is GET /api/notes, the second is POST
 
 Below is the link for the deployed application:
 
-[Note Taker](https://magrimes.github.io/NoteTaker/index.html)
+[Note Taker](https://note-taker-magrimes.herokuapp.com/)
 
 ## Code Style
 
